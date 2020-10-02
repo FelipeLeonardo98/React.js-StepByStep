@@ -1,29 +1,40 @@
+// Import de arquivos necessários
 import React, { Component } from 'react';
-import api from './api';
+import api from './services/api';
+import './App.css';
 
-
+// Criação da Class App que será exportada
 class App extends Component {
-  // Definindo o estado
+
   state = {
     artigos: [],
   }
 
   async componentDidMount() {
-    // definindo a var que conterá o retorno da API
     const response = await api.get('');
-
     this.setState({ artigos: response.data });
-    console.log(response.data);
+    //testando retorno da API console.log(response.data);
   }
-
   render() {
-    return
-    (
+    //Adquirindo os dados da API no state para o array artigos
+    const { artigos } = this.state;
+    console.log(artigos);
+
+    return (
       <div>
-        <strong> <h1>API React.js|MongoDB </h1></strong>
+        <p id="header"> Lista de Artigos | API: http://localhost:8080/api </p>
+        {artigos.map(artigo => (
+
+          <li key={artigo._id}>
+            Título: <span class="title"> {artigo.titulo} </span>
+            <p class="content"> Conteúdo:  {artigo.conteudo} </p>
+
+          </li>
+        ))}
       </div>
     )
   }
+
 
 }
 
