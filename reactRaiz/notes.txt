@@ -1,0 +1,12 @@
+ function myComponent3(){
+            return (
+            React.createElement('div', {className: 'component-3'}, 
+                React.createElement(myComponent4, {propriedade: myVar, props: 'its a props!'}))
+            )
+        }
+        function myComponent4(parametro){
+            return (
+            React.createElement('div', {className: 'component-4'}, 
+                React.createElement('p', null, `${parametro.propriedade} , ${parametro.props}`))
+            )
+        }

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programador a Bordo - Root React</title>
+    <!-- React's CDN-->
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+</head>
+<body>
+    <div id="app">
+        
+    </div>
+
+    <script>
+        // Using Component Context for share props between any components
+        const ContextHere = React.createContext('varContext');
+        function myComponent1(){
+            const myVar = 'information from component ONE';
+            return (
+            React.createElement(ContextHere.Provider, {value: myVar},
+                React.createElement('div', {className: 'component-1'}, 
+                    React.createElement(myComponent2))
+            )
+            
+            )
+        }
+
+        function myComponent2(){
+            return (
+            React.createElement('div', {className: 'component-2'}, 
+                React.createElement(myComponent3))
+            )
+        }
+
+        function myComponent3(props){
+        return(
+            React.createElement(ContextHere.Consumer, null, 
+                (varContext) => (
+                    React.createElement('div', {className: 'component-3'}, 
+                    React.createElement(myComponent4, {props: varContext}))
+                )
+            )
+        )
+        }
+        function myComponent4(parametro){
+            return (
+            React.createElement('div', {className: 'component-4'}, 
+                React.createElement('p', null, `${parametro.props}`))
+            )
+        }
+
+        function myComponent(){
+            return (
+                React.createElement('div', {className: 'main'}, 
+                React.createElement(myComponent1))
+            )
+        }
+
+        ReactDOM.render
+        (
+            React.createElement(myComponent),
+            document.getElementById('app')
+        )
+    </script>
+</body>
+</html>

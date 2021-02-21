@@ -1,0 +1,55 @@
+// Using Context API for share props between any components
+const ContextHere = React.createContext('varContext');
+function MyComponent1(){
+    const myVar = 'information from component ONE';
+    return (
+        <ContextHere.Provider value={myVar}>
+            <div className="component-1">
+                <MyComponent2 />
+            </div>
+        </ContextHere.Provider>
+    )
+    
+}
+
+function MyComponent2(){
+    return (
+        <div className="component-2">
+            <MyComponent3 />
+        </div>
+    )
+}
+
+function MyComponent3(props){
+return(
+    <ContextHere.Consumer>
+        {(varContext) => (
+                <div className="component-3">
+                    <MyComponent4 enviar={varContext} /> 
+                  {/* <p>{varContext}</p> */}
+                </div>
+            )}
+    </ContextHere.Consumer>
+)
+}
+function MyComponent4(parametro){
+    return (
+        <div className="component-4">
+            <p>{parametro.enviar}</p>
+        </div>
+    )
+}
+
+function MyComponent(){
+    return (
+        <div className="main">
+            <MyComponent1 />
+        </div>
+    )
+}
+
+ReactDOM.render
+(
+    <MyComponent/>,
+    document.getElementById('app')
+)

@@ -1,0 +1,54 @@
+// COMPOSITION: HOW TO USE {children}
+
+function MyComponent1(){
+    return (
+            <div className="component-1">
+                <MyComponent2 >
+                    {/* <p>Here is a paragraph from call's component 1 to component 2</p> */}
+                    <MyComponent4 />
+                </MyComponent2>
+            </div>
+    )
+}
+
+function MyComponent2(props){
+    return (
+        <div className="component-2">
+            <header>
+                <section>
+                    {props.children}
+                </section>
+            </header>
+            {/* <MyComponent3 /> */}
+        </div>
+    )
+}
+
+function MyComponent3(){
+return(
+        <div className="component-3">
+             <MyComponent4  /> 
+        </div>
+    )
+}
+function MyComponent4(){
+    return (
+        <div className="component-4">
+             <p>Here is the Component Four</p>
+        </div>
+    )
+}
+
+function MyComponent(){
+    return (
+        <div className="main">
+            <MyComponent1 />
+        </div>
+    )
+}
+
+ReactDOM.render
+(
+    <MyComponent/>,
+    document.getElementById('app')
+)
